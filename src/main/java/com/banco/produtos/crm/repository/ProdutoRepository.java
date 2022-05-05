@@ -1,7 +1,7 @@
 package com.banco.produtos.crm.repository;
 
 import java.math.BigDecimal;
-import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -9,7 +9,6 @@ import com.banco.produtos.crm.model.ProdutoModel;
 
 public interface ProdutoRepository extends JpaRepository<ProdutoModel, Long>{
 	
-	List<ProdutoModel> findByNome(String nome);
-	
-	List<ProdutoModel> findByPreco(BigDecimal preco);
+	Optional<ProdutoModel> findByNome(String nome);
+	Optional<ProdutoModel> findByPreco(BigDecimal preco);
 }
