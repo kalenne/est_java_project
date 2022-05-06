@@ -11,9 +11,11 @@ import com.banco.produtos.crm.model.ProdutoModel;
 import com.banco.produtos.crm.repository.ProdutoRepository;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 
 @Service
 @AllArgsConstructor
+@Log4j2
 public class ProdutoService {
 	
 	@Autowired
@@ -28,14 +30,13 @@ public class ProdutoService {
 				.orElseThrow(() -> new ProdutoNotFoundException("Nao possui no Banco"));		
 	}
 
-	public ProdutoModel getNomeProdutos(String nome) throws ProdutoNotFoundException{
-		return prodRepository.findByNome(nome)
-				.orElseThrow(() -> new ProdutoNotFoundException("Nao possui no Banco"));
+	public List<ProdutoModel>  getNomeProdutos(String nome) throws ProdutoNotFoundException{
+		 return prodRepository.findByNome(nome);
+						
 	}
 	
-	public ProdutoModel getPrecoProdutos(BigDecimal preco) throws ProdutoNotFoundException{
-		return prodRepository.findByPreco(preco)
-				.orElseThrow(() -> new ProdutoNotFoundException("Nao possui no Banco"));
+	public List<ProdutoModel>  getPrecoProdutos(BigDecimal preco) throws ProdutoNotFoundException{
+		return prodRepository.findByPreco(preco);
 	}
 	
 	public ProdutoModel saveProdutos(ProdutoModel produto) {

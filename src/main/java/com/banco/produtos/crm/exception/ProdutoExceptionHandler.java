@@ -33,8 +33,6 @@ public class ProdutoExceptionHandler extends ResponseEntityExceptionHandler {
 		FormatLocalDate flDate = new FormatLocalDate(LocalDateTime.now());
 		ResponseException responseException = new ResponseException(flDate.formatDateTime(), texto, request.getDescription(false));
 		
-		return new ResponseEntity<>(responseException, HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<>(responseException, HttpStatus.NOT_FOUND);
 	}
-
-
 }

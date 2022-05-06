@@ -47,18 +47,27 @@ public class ProdutoController<U> {
 	
 	@ApiOperation(value = "Retorna o produto de acordo com o Nome")
 	@GetMapping(value="/produtos/nome")
-	public ResponseEntity<ProdutoModel> getNomeProdutos(@RequestParam(value="nome") String nome) throws ProdutoNotFoundException {
-		ProdutoModel prodModel = produtoService.getNomeProdutos(nome);
-		return new ResponseEntity<>(prodModel, HttpStatus.OK);
+	public ResponseEntity<List<ProdutoModel>> getNomeProdutos(@RequestParam(value="nome") String nome) throws ProdutoNotFoundException {
+		List<ProdutoModel> prodModel = produtoService.getNomeProdutos(nome);
+		
+		if(prodModel.size() >= 1) {		
+			return new ResponseEntity<List<ProdutoModel>>(prodModel, HttpStatus.OK);
+		} else {
+			throw new ProdutoNotFoundException("Nao possui no Banco de Dados");
+		}
 		
 	}
 	
 	@ApiOperation(value = "Retorna o produto de acordo com o Preco")
 	@GetMapping(path="/produtos/preco")
-	public ResponseEntity<ProdutoModel> getPrecoProdutos(@RequestParam(value="preco") BigDecimal preco) throws ProdutoNotFoundException {
-		ProdutoModel prodModel = produtoService.getPrecoProdutos(preco);
-		return new ResponseEntity<>(prodModel, HttpStatus.OK);
+	public ResponseEntity<List<ProdutoModel>> getPrecoProdutos(@RequestParam(value="preco") BigDecimal preco) throws ProdutoNotFoundException {
+		List<ProdutoModel> prodModel = produtoService.getPrecoProdutos(preco);
 		
+		if (prodModel.size() >= 1) {
+			return new ResponseEntity<List<ProdutoModel>>(prodModel, HttpStatus.OK);
+		} else {
+			throw new ProdutoNotFoundException("Nao possui no Banco de Dados");
+		}		
 	}
 	
 	@ApiOperation(value = "Cadastrar produto")
